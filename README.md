@@ -1,0 +1,2 @@
+# infrastructure
+github actionをつかってクラウドのリソースを作成するやつ
