@@ -1,0 +1,59 @@
+name: 'test-template'
+
+on:
+  workflow_call:
+    inputs:
+      backend_resource_group_name:
+        required: true
+      backend_storage_account_name:
+        required: true
+      backend_container_name:
+        required: true
+      backend_key:
+        required: true
+      environment:
+        required: true
+
+jobs:
+  terraform-test:
+    name: 'Terraform'
+    environment: ${{ inputs.environment }}
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+      BACKEND_RESOURCE_GROUP_NAME: ${{ inputs.backend_resource_group_name }}
+      BACKEND_STORAGE_ACCOUNT_NAME: ${{ inputs.backend_storage_account_name }}
+      BACKEND_CONTAINER_NAME: ${{ inputs.backend_container_name }}
+      BACKEND_KEY: ${{ inputs.backend_key }}
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.2.7
+
+    - name: 'Terraform Init'
+      run: terraform init
+
+    - name: 'Terraform Validate'
+      run: terraform validate
+
+    - name: 'Terraform Plan'
+      run: |
+        terraform plan
+        -var='backend_resource_group_name=${ BACKEND_RESOURCE_GROUP_NAME }'
+        -var='backend_storage_account_name=${ BACKEND_STORAGE_ACCOUNT_NAME }'
+        -var='backend_container_name=${ BACKEND_CONTAINER_NAME }'
+        -var='backend_key=${ BACKEND_KEY }'
+        -var='subscription_id=${ ARM_SUBSCRIPTION_ID }'
+        -var='tenant_id=${ ARM_TENANT_ID }'
