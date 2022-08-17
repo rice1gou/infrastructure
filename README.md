@@ -1,2 +1,5 @@
 # infrastructure
-github actionをつかってクラウドのリソースを作成するやつ
+パイプライン経由でクラウド上にインフラを作成する。
+ひとまずGithub Actionsを利用しているが、クラウドにはAzureを利用するつもりなのでAzure Pipelineに移行するかもしれない。
+GitHub Actionsではワークフロー固有に変数を設定できないので、環境ごとに入れたい値をハードコーディングする必要があり不便。
+共通のワークフローに環境固有の値を注入するみたいなやり方がgithub actionsではやりづらいので、ひと段落したらAzurePipelineに移行予定。
