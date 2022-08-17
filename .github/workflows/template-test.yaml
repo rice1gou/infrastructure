@@ -5,14 +5,19 @@ on:
     inputs:
       backend_resource_group_name:
         required: true
+        type: string
       backend_storage_account_name:
         required: true
+        type: string
       backend_container_name:
         required: true
+        type: string
       backend_key:
         required: true
+        type: string
       environment:
         required: true
+        type: string
 
 jobs:
   terraform-test:
