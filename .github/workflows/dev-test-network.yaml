@@ -17,3 +17,4 @@ jobs:
       backend_container_name: "devtfstate"
       backend_key: "dev-network.tfstate"
       environment: "develop"
+      working_directory: "./network/envs/develop/"

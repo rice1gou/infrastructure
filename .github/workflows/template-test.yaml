@@ -18,6 +18,9 @@ on:
       environment:
         required: true
         type: string
+      working_directory:
+        required: true
+        type: string
 
 jobs:
   terraform-test:
@@ -37,6 +40,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ${{ inputs.working_directory}}
 
     steps:
     - name: Checkout
