@@ -5,16 +5,10 @@ terraform {
       version = "=3.18.0"
     }
   }
-
-  backend "azurerm" {
-  }
 }
 
 provider "azurerm" {
   features {}
-  skip_provider_registration = true
-  subscription_id            = var.subscription_id
-  tenant_id                  = var.tenant_id
 }
 
 #
