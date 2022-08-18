@@ -71,8 +71,6 @@ jobs:
     - name: 'Terraform Init'
       run: |
         terraform init \
-        -var="subscription_id=${ ARM_SUBSCRIPTION_ID }" \
-        -var="tenant_id=${ ARM_TENANT_ID }" \
         -var="network_resource_group_name=${ NETWORK_RESOURCE_GROUP_NAME }" \
         -var="location=${ LOCATOIN }" \
         -var="address_space=${ ADDRESS_SPACE }"
@@ -83,8 +81,6 @@ jobs:
     - name: 'Terraform Plan'
       run: |
         terraform plan
-        -var="subscription_id=${ ARM_SUBSCRIPTION_ID }" \
-        -var="tenant_id=${ ARM_TENANT_ID }" \
         -var="network_resource_group_name=${ NETWORK_RESOURCE_GROUP_NAME }" \
         -var="location=${ LOCATOIN }" \
         -var="address_space=${ ADDRESS_SPACE }" \
