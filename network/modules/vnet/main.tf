@@ -1,7 +1,6 @@
-locals {
-  subnets = ["psql", "st", "k8s"]
-  count = 3
-}
+#
+# Define Resources Associated With The Virtual Network
+#
 
 #Create Resource Group
 resource "azurerm_resource_group" "network" {
@@ -19,30 +18,30 @@ resource "azurerm_virtual_network" "vnet" {
 
 #Create Subnet
 resource "azurerm_subnet" "ds" {
-  name = "${var.name_prefix}-subnet-ds"
-  resource_group_name = azurerm_resource_group.network.name
+  name                 = "${var.name_prefix}-subnet-ds"
+  resource_group_name  = azurerm_resource_group.network.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_space = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 1)
+  address_space        = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 1)
 }
 
 resource "azurerm_subnet" "psql" {
-  name = "${var.name_prefix}-subnet-psql"
-  resource_group_name = azurerm_resource_group.network.name
+  name                 = "${var.name_prefix}-subnet-psql"
+  resource_group_name  = azurerm_resource_group.network.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_space = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 2)
+  address_space        = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 2)
 }
 
 resource "azurerm_subnet" "k8s" {
-  name = "${var.name_prefix}-subnet-k8s"
-  resource_group_name = azurerm_resource_group.network.name
+  name                 = "${var.name_prefix}-subnet-k8s"
+  resource_group_name  = azurerm_resource_group.network.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_space = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 3)
+  address_space        = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 3)
 }
 
 #Create NSG
 resource "azurerm_network_security_group" "ds" {
-  name = "${var.name_prefix}-nsg-ds"
-  location = var.location
+  name                = "${var.name_prefix}-nsg-ds"
+  location            = var.location
   resource_group_name = azurerm_resource_group.network.name
 
   security_rule {
@@ -59,8 +58,8 @@ resource "azurerm_network_security_group" "ds" {
 }
 
 resource "azurerm_network_security_group" "psql" {
-  name = "${var.name_prefix}-nsg-psql"
-  location = var.location
+  name                = "${var.name_prefix}-nsg-psql"
+  location            = var.location
   resource_group_name = azurerm_resource_group.network.name
 
   security_rule {
@@ -76,8 +75,8 @@ resource "azurerm_network_security_group" "psql" {
   }
 }
 resource "azurerm_network_security_group" "k8s" {
-  name = "${var.name_prefix}-nsg-k8s"
-  location = var.location
+  name                = "${var.name_prefix}-nsg-k8s"
+  location            = var.location
   resource_group_name = azurerm_resource_group.network.name
 
   security_rule {
@@ -95,16 +94,16 @@ resource "azurerm_network_security_group" "k8s" {
 
 #Create Subnet NSG Association
 resource "azurerm_subnet_network_security_group_association" "ds" {
-  subnet_id = azurerm_subnet.ds.id
+  subnet_id                 = azurerm_subnet.ds.id
   network_security_group_id = azurerm_network_security_group.ds.id
 }
 
 resource "azurerm_subnet_network_security_group_association" "psql" {
-  subnet_id = azurerm_subnet.psql.id
+  subnet_id                 = azurerm_subnet.psql.id
   network_security_group_id = azurerm_network_security_group.psql.id
 }
 
 resource "azurerm_subnet_network_security_group_association" "k8s" {
-  subnet_id = azurerm_subnet.k8s.id
+  subnet_id                 = azurerm_subnet.k8s.id
   network_security_group_id = azurerm_network_security_group.k8s.id
 }
