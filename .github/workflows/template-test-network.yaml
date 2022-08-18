@@ -27,24 +27,16 @@ on:
       address_space:
         required: true
         type: string
-    secrets:
-      client_id:
-        required: true
-      client_secret:
-        required: true
-      subscription_id:
-        required: true
-      tenant_id:
-        required: true
 
 jobs:
   terraform-test:
     name: 'Terraform'
+    environment: develop
     env:
-      ARM_CLIENT_ID: ${{ secrets.client_id }}
-      ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.subscription_id }}
-      ARM_TENANT_ID: ${{ secrets.tenant_id }}
+      ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
       BACKEND_RESOURCE_GROUP_NAME: ${{ inputs.backend_resource_group_name }}
       BACKEND_STORAGE_ACCOUNT_NAME: ${{ inputs.backend_storage_account_name }}
       BACKEND_CONTAINER_NAME: ${{ inputs.backend_container_name }}
