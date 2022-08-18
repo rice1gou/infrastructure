@@ -68,12 +68,11 @@ jobs:
       with:
         terraform_version: 1.2.7
 
+    - name: 'test'
+      run: echo ${ NETWORK_RESOURCE_GROUP_NAME }
     - name: 'Terraform Init'
       run: |
-        terraform init \
-        -var="network_resource_group_name=${ NETWORK_RESOURCE_GROUP_NAME }" \
-        -var="location=${ LOCATOIN }" \
-        -var="address_space=${ ADDRESS_SPACE }"
+        terraform init
 
     - name: 'Terraform Validate'
       run: terraform validate
