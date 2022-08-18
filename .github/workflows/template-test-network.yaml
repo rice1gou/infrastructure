@@ -71,10 +71,6 @@ jobs:
     - name: 'Terraform Init'
       run: |
         terraform init
-        -backend-config='resource_group_name=${ BACKEND_RESOURCE_GROUP_NAME }'
-        -backend-config='storage_account_name=${ BACKEND_STORAGE_ACCOUNT_NAME }'
-        -backend-config='container_name=${ BACKEND_CONTAINER_NAME }'
-        -backend-config='key=${ BACKEND_KEY }'
         -var='subscription_id=${ ARM_SUBSCRIPTION_ID }'
         -var='tenant_id=${ ARM_TENANT_ID }'
         -var='network_resource_group_name=${ NETWORK_RESOURCE_GROUP_NAME }'
