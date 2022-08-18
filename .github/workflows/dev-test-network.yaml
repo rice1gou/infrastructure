@@ -18,8 +18,12 @@ jobs:
       backend_storage_account_name: 'rice1goutfstate'
       backend_container_name: 'devtfstate'
       backend_key: 'dev-network.tfstate'
-      environment: 'develop'
       working_directory: './network/envs/develop/'
       network_resource_group_name: 'DevNetworkRG'
       location: 'japaneast'
       address_space: '["10.1.0.0/16"]'
+    secret:
+      client_id: ${{ secrets.AZURE_AD_CLIENT_ID }}
+      client_secret: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
+      subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      tenant_id: ${{ secrets.AZURE_AD_TENANT_ID }}
