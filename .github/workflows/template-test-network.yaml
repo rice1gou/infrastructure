@@ -1,18 +1,35 @@
-name: 'test-template'
+name: 'template-test-network'
 
 on:
   workflow_call:
     inputs:
       backend_resource_group_name:
         required: true
+        type: string
       backend_storage_account_name:
         required: true
+        type: string
       backend_container_name:
         required: true
+        type: string
       backend_key:
         required: true
+        type: string
+      working_directory:
+        required: true
+        type: string
       environment:
         required: true
+        type: string
+      network_resource_group_name:
+        required: true
+        type: string
+      location:
+        required: true
+        type: string
+      address_space:
+        required: true
+        type: string
 
 jobs:
   terraform-test:
@@ -27,11 +44,15 @@ jobs:
       BACKEND_STORAGE_ACCOUNT_NAME: ${{ inputs.backend_storage_account_name }}
       BACKEND_CONTAINER_NAME: ${{ inputs.backend_container_name }}
       BACKEND_KEY: ${{ inputs.backend_key }}
+      NETWORK_RESOURCE_GROUP_NAME: ${{ inputs.network_resource_group_name }}
+      LOCATOIN: ${{ inputs.location }}
+      ADDRESS_SPACE: ${{ inputs.address_space }}
     runs-on: ubuntu-latest
 
     defaults:
       run:
         shell: bash
+        working-directory: ${{ inputs.working_directory}}
 
     steps:
     - name: Checkout
@@ -43,17 +64,19 @@ jobs:
         terraform_version: 1.2.7
 
     - name: 'Terraform Init'
-      run: terraform init
+      run: |
+        terraform init \
+        -backend-config="resource_group_name=${BACKEND_RESOURCE_GROUP_NAME}" \
+        -backend-config="storage_account_name=${BACKEND_STORAGE_ACCOUNT_NAME}" \
+        -backend-config="container_name=${BACKEND_CONTAINER_NAME}" \
+        -backend-config="key=${BACKEND_KEY}"
 
     - name: 'Terraform Validate'
       run: terraform validate
 
     - name: 'Terraform Plan'
       run: |
-        terraform plan
-        -var='backend_resource_group_name=${ BACKEND_RESOURCE_GROUP_NAME }'
-        -var='backend_storage_account_name=${ BACKEND_STORAGE_ACCOUNT_NAME }'
-        -var='backend_container_name=${ BACKEND_CONTAINER_NAME }'
-        -var='backend_key=${ BACKEND_KEY }'
-        -var='subscription_id=${ ARM_SUBSCRIPTION_ID }'
-        -var='tenant_id=${ ARM_TENANT_ID }'
+        terraform plan \
+        -var="network_resource_group_name=${NETWORK_RESOURCE_GROUP_NAME}" \
+        -var="location=${LOCATOIN}" \
+        -var="address_space=${ADDRESS_SPACE}"

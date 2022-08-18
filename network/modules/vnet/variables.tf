@@ -1,7 +1,7 @@
-variable resource_group_name {}
+variable "resource_group_name" {}
 
-variable location {}
+variable "location" {}
 
-variable name_prefix {}
+variable "name_prefix" {}
 
-variable address_space {}
+variable "address_space" {}
