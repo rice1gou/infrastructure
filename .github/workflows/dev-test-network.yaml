@@ -18,6 +18,7 @@ jobs:
       backend_storage_account_name: 'rice1goutfstate'
       backend_container_name: 'devtfstate'
       backend_key: 'dev-network.tfstate'
+      environment: 'develop'
       working_directory: './network/envs/develop/'
       network_resource_group_name: 'DevNetworkRG'
       location: 'japaneast'
