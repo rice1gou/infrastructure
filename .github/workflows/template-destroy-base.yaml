@@ -73,7 +73,7 @@ jobs:
 
     - name: 'Terraform Destroy'
       run: |
-        terraform destroy \
+        terraform destroy -auto-approve \
         -var="base_resource_group_name=${BASE_RESOURCE_GROUP_NAME}" \
         -var="location=${LOCATOIN}" \
         -var="address_space=${ADDRESS_SPACE}"
