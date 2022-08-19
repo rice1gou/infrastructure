@@ -21,21 +21,21 @@ resource "azurerm_subnet" "ds" {
   name                 = "${var.name_prefix}-subnet-ds"
   resource_group_name  = azurerm_resource_group.network.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes        = [cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 1)]
+  address_prefixes     = [cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 1)]
 }
 
 resource "azurerm_subnet" "psql" {
   name                 = "${var.name_prefix}-subnet-psql"
   resource_group_name  = azurerm_resource_group.network.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes        = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 2)
+  address_prefixes     = [cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 2)]
 }
 
 resource "azurerm_subnet" "k8s" {
   name                 = "${var.name_prefix}-subnet-k8s"
   resource_group_name  = azurerm_resource_group.network.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes        = cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 3)
+  address_prefixes     = [cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 3)]
 }
 
 #Create NSG
