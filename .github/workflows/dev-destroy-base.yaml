@@ -1,0 +1,18 @@
+name: 'dev-destroy-base'
+
+on: workflow_dispatch
+
+jobs:
+  terraform-test:
+    uses: ./.github/workflows/template-destroy-base.yaml
+    with:
+      backend_resource_group_name: 'TerraformRG'
+      backend_storage_account_name: 'rice1goutfstate'
+      backend_container_name: 'devtfstate'
+      backend_key: 'dev-base.tfstate'
+      environment: 'develop'
+      working_directory: './base/envs/develop/'
+      base_resource_group_name: 'DevBaseRG'
+      location: 'japaneast'
+      address_space: '["10.1.0.0/16"]'
+    secrets: inherit
