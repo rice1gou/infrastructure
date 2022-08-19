@@ -55,13 +55,25 @@ jobs:
         working-directory: ${{ inputs.working_directory}}
 
     steps:
-    - name: Checkout
+    - name: 'Checkout'
       uses: actions/checkout@v2
 
-    - name: setup Terraform
+    - name: 'Setup Terraform'
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 1.2.7
+
+    - name: 'Terraform Format'
+      run: terraform fmt -recursive -check -diff
+
+    - name: 'Test with Checkov'
+      id: checkov
+      uses: bridgecrewio/checkov-action@master
+      with:
+        directory: .
+        framework: terraform
+        quiet: false
+        skip_check: LOW
 
     - name: 'Terraform Init'
       run: |
