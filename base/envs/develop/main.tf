@@ -22,7 +22,7 @@ locals {
 
 module "vnet" {
   source = "../../modules/vnet"
-  resource_group_name = var.network_resource_group_name
+  resource_group_name = var.base_resource_group_name
   location = var.location
   name_prefix = local.name_prefix
   address_space = var.address_space

@@ -1,26 +1,26 @@
-name: 'dev-test-network'
+name: 'dev-test-base'
 
 on:
   push:
     branches:
       - feature/*
     path:
-      - ./network/**
+      - ./base/**
   pull_request:
     branches:
       - main
 
 jobs:
   terraform-test:
-    uses: ./.github/workflows/template-test-network.yaml
+    uses: ./.github/workflows/template-test-base.yaml
     with:
       backend_resource_group_name: 'TerraformRG'
       backend_storage_account_name: 'rice1goutfstate'
       backend_container_name: 'devtfstate'
-      backend_key: 'dev-network.tfstate'
+      backend_key: 'dev-base.tfstate'
       environment: 'develop'
-      working_directory: './network/envs/develop/'
-      network_resource_group_name: 'DevNetworkRG'
+      working_directory: './base/envs/develop/'
+      base_resource_group_name: 'DevBaseRG'
       location: 'japaneast'
       address_space: '["10.1.0.0/16"]'
     secrets: inherit
