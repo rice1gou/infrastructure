@@ -1,6 +1,5 @@
-branch: master
 directory:
-- ./base/envs/local
+- .
 download-external-modules: false
 evaluate-variables: true
 external-modules-download-path: .external_modules

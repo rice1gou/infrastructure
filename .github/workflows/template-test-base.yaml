@@ -15,6 +15,9 @@ on:
       backend_key:
         required: true
         type: string
+      skip_check:
+        required: true
+        type: string
       working_directory:
         required: true
         type: string
@@ -73,7 +76,7 @@ jobs:
         directory: .
         framework: terraform
         quiet: false
-        config_file: ./checkov/config.yaml
+        config_file: checkov/config.yaml
 
     - name: 'Terraform Init'
       run: |
