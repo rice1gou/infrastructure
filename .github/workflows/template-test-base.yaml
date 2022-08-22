@@ -73,6 +73,7 @@ jobs:
         directory: .
         framework: terraform
         quiet: false
+        config_file: ./checkov/config.yaml
 
     - name: 'Terraform Init'
       run: |
