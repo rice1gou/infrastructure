@@ -76,7 +76,7 @@ jobs:
         directory: .
         framework: terraform
         quiet: false
-        config_file: checkov/config.yaml
+        skip_check: ${{ inputs.skip_check }}
 
     - name: 'Terraform Init'
       run: |
