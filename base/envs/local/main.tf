@@ -38,5 +38,5 @@ module "kv" {
   name_prefix                = local.name_prefix
   soft_delete_retention_days = 7
   sku_name                   = "standard"
-  purge_protection_enabled   = false
+  enable_rbac_authorization  = true
 }

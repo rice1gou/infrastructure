@@ -18,6 +18,6 @@ variable "sku_name" {
   description = "KeyvaultのSKUの名前"
 }
 
-variable "purge_protection_enabled" {
-	description = "パージに対する保護が有効になっているか"
+variable "enable_rbac_authorization" {
+	description = "AzureRBACを有効にするかどうか"
 }
