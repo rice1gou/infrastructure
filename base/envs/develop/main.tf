@@ -1,3 +1,4 @@
+#Define AzureRM Version
 terraform {
   required_providers {
     azurerm = {
@@ -10,11 +11,13 @@ terraform {
   }
 }
 
+#Define Terraform Provider
 provider "azurerm" {
   features {}
   skip_provider_registration = true
 }
 
+#Define Local Variables
 locals {
   name_prefix = "dev"
 
@@ -26,6 +29,7 @@ resource "azurerm_resource_group" "base" {
   location = var.location
 }
 
+#Create Virtual Network
 module "vnet" {
   source              = "../../modules/vnet"
   resource_group_name = azurerm_resource_group.base.name
@@ -34,6 +38,7 @@ module "vnet" {
   address_space       = var.address_space
 }
 
+#Create Keyvault Key Container
 module "kv" {
   source                     = "../../modules/kv"
   resource_group_name        = azurerm_resource_group.base.name

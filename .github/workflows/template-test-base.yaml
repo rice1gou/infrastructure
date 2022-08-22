@@ -73,7 +73,6 @@ jobs:
         directory: .
         framework: terraform
         quiet: false
-        skip_check: LOW,CKV_AZURE_110
 
     - name: 'Terraform Init'
       run: |

@@ -21,10 +21,22 @@ resource "azurerm_resource_group" "base" {
   location = var.location
 }
 
+#Create Virtual Network
 module "vnet" {
   source              = "../../modules/vnet"
   resource_group_name = azurerm_resource_group.base.name
   location            = var.location
   name_prefix         = local.name_prefix
   address_space       = var.address_space
+}
+
+#Create Keyvault Key Container
+module "kv" {
+  source                     = "../../modules/kv"
+  resource_group_name        = azurerm_resource_group.base.name
+  location                   = var.location
+  name_prefix                = local.name_prefix
+  soft_delete_retention_days = 7
+  sku_name                   = "standard"
+  purge_protection_enabled   = false
 }
