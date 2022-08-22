@@ -20,9 +20,15 @@ locals {
 
 }
 
+#Create Resource Group
+resource "azurerm_resource_group" "base" {
+  name     = var.base_resource_group_name
+  location = var.location
+}
+
 module "vnet" {
   source              = "../../modules/vnet"
-  resource_group_name = var.base_resource_group_name
+  resource_group_name = azurerm_resource_group.base.name
   location            = var.location
   name_prefix         = local.name_prefix
   address_space       = var.address_space
