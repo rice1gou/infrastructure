@@ -33,3 +33,12 @@ module "vnet" {
   name_prefix         = local.name_prefix
   address_space       = var.address_space
 }
+
+module "kv" {
+  source                     = "../../modules/kv"
+  resource_group_name        = azurerm_resource_group.base.name
+  location                   = var.location
+  name_prefix                = local.name_prefix
+  soft_delete_retention_days = 7
+  sku_name                   = "standard"
+}
