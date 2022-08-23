@@ -1,8 +1,8 @@
 #
-#Entory Point for Develop Environment
+# Entory Point for Develop Environment
 #
 
-#Difine Providers To Be Used
+# Difine Providers To Be Used
 terraform {
   required_providers {
     azurerm = {
@@ -17,27 +17,27 @@ terraform {
   backend "azurerm" {}
 }
 
-#Setting AzureRM Provider
+# Setting AzureRM Provider
 provider "azurerm" {
   features {}
   skip_provider_registration = true
 }
 
-#Setting AzureAD Provider
+# Setting AzureAD Provider
 provider "azuread" {}
 
-#Define Local Variables
+# Define Local Variables
 locals {
   name_prefix = "dev"
 }
 
-#Create Resource Group
+# Create Resource Group
 resource "azurerm_resource_group" "base" {
   name     = var.base_resource_group_name
   location = var.location
 }
 
-#Create Virtual Network
+# Import Virtual Network Module
 module "vnet" {
   source              = "../../modules/vnet"
   resource_group_name = azurerm_resource_group.base.name
@@ -46,7 +46,7 @@ module "vnet" {
   address_space       = var.address_space
 }
 
-#Create Keyvault Key Container
+# Import Key Vault Module
 module "kv" {
   source                     = "../../modules/kv"
   resource_group_name        = azurerm_resource_group.base.name

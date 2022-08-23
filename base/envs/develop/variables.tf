@@ -1,5 +1,5 @@
 #
-#Define Variables for Develop Environment
+# Define Variables to be Used in the Develop Environment
 #
 
 variable "base_resource_group_name" {

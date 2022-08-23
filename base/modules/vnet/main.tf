@@ -2,7 +2,7 @@
 # Define Resources Associated With The Virtual Network
 #
 
-#Create Virtual Network
+# Create Virtual Network
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.name_prefix}-vnet"
   address_space       = var.address_space
@@ -10,7 +10,7 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = var.resource_group_name
 }
 
-#Create Subnet
+# Create Subnet
 resource "azurerm_subnet" "ds" {
   name                 = "${var.name_prefix}-subnet-ds"
   resource_group_name  = var.resource_group_name
@@ -32,7 +32,7 @@ resource "azurerm_subnet" "k8s" {
   address_prefixes     = [cidrsubnet(azurerm_virtual_network.vnet.address_space[0], 8, 3)]
 }
 
-#Create NSG
+# Create NSG
 resource "azurerm_network_security_group" "ds" {
   name                = "${var.name_prefix}-nsg-ds"
   location            = var.location
@@ -51,7 +51,7 @@ resource "azurerm_network_security_group" "k8s" {
   resource_group_name = var.resource_group_name
 }
 
-#Create Subnet NSG Association
+# Create Subnet NSG Association
 resource "azurerm_subnet_network_security_group_association" "ds" {
   subnet_id                 = azurerm_subnet.ds.id
   network_security_group_id = azurerm_network_security_group.ds.id

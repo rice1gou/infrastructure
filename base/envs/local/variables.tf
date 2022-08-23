@@ -1,5 +1,5 @@
 #
-#Define Variables for Local Environment.
+# Define Variables to be Used in the Local Environment
 #
 
 variable "base_resource_group_name" {
