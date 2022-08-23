@@ -6,11 +6,11 @@
 terraform {
   required_providers {
     azurerm = {
-      source = "hashicorp/azurerm"
+      source  = "hashicorp/azurerm"
       version = "=3.18.0"
     }
     azuread = {
-      source = "hashicorp/azuread"
+      source  = "hashicorp/azuread"
       version = "=2.27.0"
     }
   }
@@ -54,5 +54,5 @@ module "kv" {
   soft_delete_retention_days = 7
   sku_name                   = "standard"
   enable_rbac_authorization  = true
-  infrastructure_group_name = var.infrastructure_group_name
+  infrastructure_group_name  = var.infrastructure_group_name
 }

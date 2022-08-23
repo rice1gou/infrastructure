@@ -23,7 +23,7 @@ variable "sku_name" {
 }
 
 variable "enable_rbac_authorization" {
-	description = "AzureRBACを有効にするかどうか"
+  description = "AzureRBACを有効にするかどうか"
 }
 
 variable "infrastructure_group_name" {

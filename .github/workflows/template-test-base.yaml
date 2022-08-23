@@ -33,6 +33,9 @@ on:
       address_space:
         required: true
         type: string
+      infrastructure_group_name:
+        required: true
+        type: string
 
 jobs:
   terraform-test:
@@ -50,6 +53,7 @@ jobs:
       BASE_RESOURCE_GROUP_NAME: ${{ inputs.base_resource_group_name }}
       LOCATOIN: ${{ inputs.location }}
       ADDRESS_SPACE: ${{ inputs.address_space }}
+      INFRASTRUCTURE_GROUP_NAME: ${{ inputs.infrastructure_group_name }}
     runs-on: ubuntu-latest
 
     defaults:
@@ -94,4 +98,5 @@ jobs:
         terraform plan \
         -var="base_resource_group_name=${BASE_RESOURCE_GROUP_NAME}" \
         -var="location=${LOCATOIN}" \
-        -var="address_space=${ADDRESS_SPACE}"
+        -var="address_space=${ADDRESS_SPACE}" \
+        -var="infrastructure_group_name=${INFRASTRUCTURE_GROUP_NAME}"
