@@ -61,5 +61,4 @@ jobs:
 
     - name: 'Terraform Destroy'
       run: |
-        terraform destroy -auto-approve \
-        -var="=${}" \
+        terraform destroy -auto-approve

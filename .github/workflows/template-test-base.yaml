@@ -77,7 +77,7 @@ jobs:
       id: checkov
       uses: bridgecrewio/checkov-action@master
       with:
-        directory: .
+        directory: ${{ inputs.working_directory}}
         framework: terraform
         quiet: false
         skip_check: ${{ inputs.skip_check }}
