@@ -24,7 +24,6 @@ resource "azurerm_key_vault" "kv" {
 
 #Create Role Assignment to Management the Key Vault
 resource "azurerm_role_assignment" "kv" {
-  name                 = "${var.name_prefix}-kv-infra-assignment"
   scope                = azurerm_key_vault.kv.id
   role_definition_name = "Key Vault Administrator"
   principal_id         = data.azuread_group.infrastructure.id
