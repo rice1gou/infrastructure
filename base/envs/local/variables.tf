@@ -1,3 +1,7 @@
+#
+#Define Variables for Local Environment.
+#
+
 variable "base_resource_group_name" {
   description = "配置先となるリソースグループ名"
 }

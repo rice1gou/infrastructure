@@ -1,3 +1,7 @@
+#
+#Define Variables to be Used in the Key Vault Module
+#
+
 variable "resource_group_name" {
   description = "配置先となるリソースグループ名"
 }

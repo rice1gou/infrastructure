@@ -1,3 +1,8 @@
+#
+#Entory Point for Local Environment
+#
+
+#Difine Providers To Be Used
 terraform {
   required_providers {
     azurerm = {
@@ -31,7 +36,7 @@ resource "azurerm_resource_group" "base" {
   location = var.location
 }
 
-#Create Virtual Network
+#Import Virtual Network Module
 module "vnet" {
   source              = "../../modules/vnet"
   resource_group_name = azurerm_resource_group.base.name
@@ -40,7 +45,7 @@ module "vnet" {
   address_space       = var.address_space
 }
 
-#Create Keyvault Key Container
+#Import Key Vault Module
 module "kv" {
   source                     = "../../modules/kv"
   resource_group_name        = azurerm_resource_group.base.name
