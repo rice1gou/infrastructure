@@ -21,3 +21,7 @@ variable "sku_name" {
 variable "enable_rbac_authorization" {
 	description = "AzureRBACを有効にするかどうか"
 }
+
+variable "infrastructure_group_name" {
+  description = "AzureADのインフラ管理ユーザーグループ名"
+}

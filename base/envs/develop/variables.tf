@@ -10,3 +10,7 @@ variable "address_space" {
   description = "vnetのアドレス範囲"
   type        = list(string)
 }
+
+variable "infrastructure_group_name" {
+  description = "AzureADのインフラ管理ユーザーグループ名"
+}
