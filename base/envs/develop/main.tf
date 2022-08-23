@@ -14,6 +14,7 @@ terraform {
       version = "=2.27.0"
     }
   }
+  backend "azurerm" {}
 }
 
 #Setting AzureRM Provider
