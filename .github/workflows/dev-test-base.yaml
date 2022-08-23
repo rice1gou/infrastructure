@@ -19,8 +19,10 @@ jobs:
       backend_container_name: 'devtfstate'
       backend_key: 'dev-base.tfstate'
       environment: 'develop'
+      skip_check: LOW,CKV_AZURE_110,CKV_AZURE_109,CKV_AZURE_42
       working_directory: './base/envs/develop/'
       base_resource_group_name: 'DevBaseRG'
       location: 'japaneast'
       address_space: '["10.1.0.0/16"]'
+      infrastructure_group_name: 'Infrastructure'
     secrets: inherit

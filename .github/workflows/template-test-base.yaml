@@ -15,6 +15,9 @@ on:
       backend_key:
         required: true
         type: string
+      skip_check:
+        required: true
+        type: string
       working_directory:
         required: true
         type: string
@@ -28,6 +31,9 @@ on:
         required: true
         type: string
       address_space:
+        required: true
+        type: string
+      infrastructure_group_name:
         required: true
         type: string
 
@@ -47,6 +53,7 @@ jobs:
       BASE_RESOURCE_GROUP_NAME: ${{ inputs.base_resource_group_name }}
       LOCATOIN: ${{ inputs.location }}
       ADDRESS_SPACE: ${{ inputs.address_space }}
+      INFRASTRUCTURE_GROUP_NAME: ${{ inputs.infrastructure_group_name }}
     runs-on: ubuntu-latest
 
     defaults:
@@ -73,7 +80,7 @@ jobs:
         directory: .
         framework: terraform
         quiet: false
-        skip_check: LOW
+        skip_check: ${{ inputs.skip_check }}
 
     - name: 'Terraform Init'
       run: |
@@ -91,4 +98,5 @@ jobs:
         terraform plan \
         -var="base_resource_group_name=${BASE_RESOURCE_GROUP_NAME}" \
         -var="location=${LOCATOIN}" \
-        -var="address_space=${ADDRESS_SPACE}"
+        -var="address_space=${ADDRESS_SPACE}" \
+        -var="infrastructure_group_name=${INFRASTRUCTURE_GROUP_NAME}"

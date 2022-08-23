@@ -1,3 +1,7 @@
+#
+#Define Variables to be Used in the Virtual Network Module
+#
+
 variable "resource_group_name" {
   description = "virtual networkの配置先となるリソースグループ名"
 }
