@@ -24,6 +24,15 @@ on:
       environment:
         required: true
         type: string
+      base_resource_group_name:
+        required: true
+        type: string
+      structure_resource_group_name:
+        required: true
+        type: string
+      location:
+        required: true
+        type: string
 
 jobs:
   terraform-test:
@@ -38,6 +47,9 @@ jobs:
       BACKEND_STORAGE_ACCOUNT_NAME: ${{ inputs.backend_storage_account_name }}
       BACKEND_CONTAINER_NAME: ${{ inputs.backend_container_name }}
       BACKEND_KEY: ${{ inputs.backend_key }}
+      BASE_RESOURCE_GROUP_NAME: ${{ inputs.base_resource_group_name }}
+      STRUCTURE_RESOURCE_GROUP_NAME: ${{ inputs.structure_resource_group_name }}
+      LOCATION: ${{ inputs.location }}
     runs-on: ubuntu-latest
 
     defaults:
@@ -79,4 +91,7 @@ jobs:
 
     - name: 'Terraform Plan'
       run: |
-        terraform plan
+        terraform plan \
+        -var="base_resource_group_name=${BASE_RESOURCE_GROUP_NAME}" \
+        -var="structure_resource_group_name=${STRUCTURE_RESOURCE_GROUP_NAME}" \
+        -var="location=${LOCATION}"

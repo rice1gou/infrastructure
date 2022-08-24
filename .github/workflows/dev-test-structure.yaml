@@ -17,7 +17,10 @@ jobs:
       backend_storage_account_name: 'rice1goutfstate'
       backend_container_name: 'devtfstate'
       backend_key: 'dev-structure.tfstate'
-      environment: 'develop'
       skip_check: LOW
       working_directory: './structure/envs/develop/'
+      environment: 'develop'
+      base_resource_group_name: 'DevBaseRG'
+      structure_resource_group_name: 'DevStructureRG'
+      location: 'japaneast'
     secrets: inherit
