@@ -56,8 +56,8 @@ data "azurerm_subnet" "psql" {
   resource_group_name  = var.base_resource_group_name
 }
 
-data "azurerm_subnet" "aks" {
-  name                 = "${local.name_prefix}-subnet-aks"
+data "azurerm_subnet" "k8s" {
+  name                 = "${local.name_prefix}-subnet-k8s"
   virtual_network_name = data.azurerm_virtual_network.vnet.name
   resource_group_name  = var.base_resource_group_name
 }
@@ -78,10 +78,10 @@ data "azurerm_subnet" "aks" {
 #	subnet_id = data.azurerm_subnet.psql.id
 #}
 
-# Import AKS Module
-#module "aks" {
-#	source = "../../modules/aks"
+# Import Kubernetes Module
+#module "k8s" {
+#	source = "../../modules/k8s"
 #	resource_group_name = azurerm_resource_group.structure.name
 #	location = var.location
-#	subnet_id = data.azurerm_subnet.aks.id
+#	subnet_id = data.azurerm_subnet.k8s.id
 #}
