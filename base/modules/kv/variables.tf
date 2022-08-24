@@ -1,5 +1,5 @@
 #
-#Define Variables to be Used in the Key Vault Module
+# Define Variables to be Used in the Key Vault Module
 #
 
 variable "resource_group_name" {

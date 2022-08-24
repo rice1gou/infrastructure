@@ -1,4 +1,4 @@
-name: 'template-test-base'
+name: 'template-destroy-structure'
 
 on:
   workflow_call:
@@ -15,25 +15,10 @@ on:
       backend_key:
         required: true
         type: string
-      skip_check:
-        required: true
-        type: string
       working_directory:
         required: true
         type: string
       environment:
-        required: true
-        type: string
-      base_resource_group_name:
-        required: true
-        type: string
-      location:
-        required: true
-        type: string
-      address_space:
-        required: true
-        type: string
-      infrastructure_group_name:
         required: true
         type: string
 
@@ -50,10 +35,6 @@ jobs:
       BACKEND_STORAGE_ACCOUNT_NAME: ${{ inputs.backend_storage_account_name }}
       BACKEND_CONTAINER_NAME: ${{ inputs.backend_container_name }}
       BACKEND_KEY: ${{ inputs.backend_key }}
-      BASE_RESOURCE_GROUP_NAME: ${{ inputs.base_resource_group_name }}
-      LOCATOIN: ${{ inputs.location }}
-      ADDRESS_SPACE: ${{ inputs.address_space }}
-      INFRASTRUCTURE_GROUP_NAME: ${{ inputs.infrastructure_group_name }}
     runs-on: ubuntu-latest
 
     defaults:
@@ -62,25 +43,13 @@ jobs:
         working-directory: ${{ inputs.working_directory}}
 
     steps:
-    - name: 'Checkout'
+    - name: Checkout
       uses: actions/checkout@v2
 
-    - name: 'Setup Terraform'
+    - name: setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 1.2.7
-
-    - name: 'Terraform Format'
-      run: terraform fmt -recursive -check -diff
-
-    - name: 'Test with Checkov'
-      id: checkov
-      uses: bridgecrewio/checkov-action@master
-      with:
-        directory: ${{ inputs.working_directory}}
-        framework: terraform
-        quiet: false
-        skip_check: ${{ inputs.skip_check }}
 
     - name: 'Terraform Init'
       run: |
@@ -90,13 +59,6 @@ jobs:
         -backend-config="container_name=${BACKEND_CONTAINER_NAME}" \
         -backend-config="key=${BACKEND_KEY}"
 
-    - name: 'Terraform Validate'
-      run: terraform validate
-
-    - name: 'Terraform Plan'
+    - name: 'Terraform Destroy'
       run: |
-        terraform plan \
-        -var="base_resource_group_name=${BASE_RESOURCE_GROUP_NAME}" \
-        -var="location=${LOCATOIN}" \
-        -var="address_space=${ADDRESS_SPACE}" \
-        -var="infrastructure_group_name=${INFRASTRUCTURE_GROUP_NAME}"
+        terraform destroy -auto-approve

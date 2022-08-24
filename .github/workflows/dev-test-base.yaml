@@ -2,10 +2,9 @@ name: 'dev-test-base'
 
 on:
   push:
-    branches:
-      - feature/*
     path:
       - ./base/**
+      - ./.github/workflows/*-base.yaml
   pull_request:
     branches:
       - main

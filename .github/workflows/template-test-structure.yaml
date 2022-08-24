@@ -1,4 +1,4 @@
-name: 'template-test-base'
+name: 'template-test-structure'
 
 on:
   workflow_call:
@@ -27,13 +27,10 @@ on:
       base_resource_group_name:
         required: true
         type: string
+      structure_resource_group_name:
+        required: true
+        type: string
       location:
-        required: true
-        type: string
-      address_space:
-        required: true
-        type: string
-      infrastructure_group_name:
         required: true
         type: string
 
@@ -51,9 +48,8 @@ jobs:
       BACKEND_CONTAINER_NAME: ${{ inputs.backend_container_name }}
       BACKEND_KEY: ${{ inputs.backend_key }}
       BASE_RESOURCE_GROUP_NAME: ${{ inputs.base_resource_group_name }}
-      LOCATOIN: ${{ inputs.location }}
-      ADDRESS_SPACE: ${{ inputs.address_space }}
-      INFRASTRUCTURE_GROUP_NAME: ${{ inputs.infrastructure_group_name }}
+      STRUCTURE_RESOURCE_GROUP_NAME: ${{ inputs.structure_resource_group_name }}
+      LOCATION: ${{ inputs.location }}
     runs-on: ubuntu-latest
 
     defaults:
@@ -97,6 +93,5 @@ jobs:
       run: |
         terraform plan \
         -var="base_resource_group_name=${BASE_RESOURCE_GROUP_NAME}" \
-        -var="location=${LOCATOIN}" \
-        -var="address_space=${ADDRESS_SPACE}" \
-        -var="infrastructure_group_name=${INFRASTRUCTURE_GROUP_NAME}"
+        -var="structure_resource_group_name=${STRUCTURE_RESOURCE_GROUP_NAME}" \
+        -var="location=${LOCATION}"

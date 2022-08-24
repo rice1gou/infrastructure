@@ -1,5 +1,5 @@
 #
-#Assign Variables for Local Environment
+# Assign Variables for Local Environment
 #
 
 base_resource_group_name  = "DevBaseRG"

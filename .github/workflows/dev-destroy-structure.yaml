@@ -1,0 +1,15 @@
+name: 'dev-destroy-structure'
+
+on: workflow_dispatch
+
+jobs:
+  terraform-test:
+    uses: ./.github/workflows/template-destroy-structure.yaml
+    with:
+      backend_resource_group_name: 'TerraformRG'
+      backend_storage_account_name: 'rice1goutfstate'
+      backend_container_name: 'devtfstate'
+      backend_key: 'dev-structure.tfstate'
+      environment: 'develop'
+      working_directory: './structure/envs/develop/'
+    secrets: inherit
