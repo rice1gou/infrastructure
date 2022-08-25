@@ -18,10 +18,10 @@ on:
       skip_check:
         required: true
         type: string
-      working_directory:
+      environment:
         required: true
         type: string
-      environment:
+      working_directory:
         required: true
         type: string
       base_resource_group_name:

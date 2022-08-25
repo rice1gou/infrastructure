@@ -18,8 +18,8 @@ jobs:
       backend_container_name: 'devtfstate'
       backend_key: 'dev-structure.tfstate'
       skip_check: LOW
-      working_directory: './structure/envs/develop/'
       environment: 'develop'
+      working_directory: './structure/envs/develop/'
       base_resource_group_name: 'DevBaseRG'
       structure_resource_group_name: 'DevStructureRG'
       location: 'japaneast'
