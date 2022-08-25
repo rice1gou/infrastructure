@@ -1,0 +1,33 @@
+name: 'base-test-dev'
+on:
+  push:
+    pathes:
+      - ./base/**
+jobs:
+  terraform:
+    uses: ./.github/workflows/base-var-dev.yaml
+    with:
+      called_from: 'test'
+    secrets: inherit
+
+---
+
+name: 'dev-deploy-base'
+on: workflow_dispatch
+jobs:
+  terraform:
+    uses: ./.github/workflows/base-var-dev.yaml
+    with:
+      called_from: 'deploy'
+    secrets: inherit
+
+---
+
+name: 'dev-deploy-base'
+on: workflow_dispatch
+jobs:
+  terraform:
+    uses: ./.github/workflows/base-var-dev.yaml
+    with:
+      called_from: 'destroy'
+    secrets: inherit

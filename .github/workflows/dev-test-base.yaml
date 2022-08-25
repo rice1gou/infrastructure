@@ -2,16 +2,15 @@ name: 'dev-test-base'
 
 on:
   push:
-    path:
+    paths:
       - ./base/**
-      - ./.github/workflows/*-base.yaml
   pull_request:
     branches:
       - main
 
 jobs:
   terraform-test:
-    uses: ./.github/workflows/template-test-base.yaml
+    uses: ./.github/workflows/template-base.yaml
     with:
       backend_resource_group_name: 'TerraformRG'
       backend_storage_account_name: 'rice1goutfstate'

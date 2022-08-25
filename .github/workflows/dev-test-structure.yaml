@@ -2,16 +2,15 @@ name: 'dev-test-structure'
 
 on:
   push:
-    path:
+    paths:
       - ./structure/**
-      - ./.github/workflows/*-structure.yaml
   pull_request:
     branches:
       - main
 
 jobs:
   terraform-test:
-    uses: ./.github/workflows/template-test-structure.yaml
+    uses: ./.github/workflows/template-structure.yaml
     with:
       backend_resource_group_name: 'TerraformRG'
       backend_storage_account_name: 'rice1goutfstate'
