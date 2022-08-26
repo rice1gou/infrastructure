@@ -1,6 +1,7 @@
 name: 'dev-deploy-structure'
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
 
 jobs:
   terraform-test:

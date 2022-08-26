@@ -1,6 +1,7 @@
 name: 'dev-destroy-base'
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
 
 jobs:
   terraform-test:
