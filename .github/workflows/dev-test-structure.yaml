@@ -2,9 +2,8 @@ name: 'dev-test-structure'
 
 on:
   push:
-    path:
+    paths:
       - ./structure/**
-      - ./.github/workflows/*-structure.yaml
   pull_request:
     branches:
       - main
