@@ -1,10 +1,11 @@
 name: 'var-base-dev'
 
-on: workflow_called
-  inputs:
-    called_from:
-      required: true
-      type: string
+on:
+  workflow_called:
+    inputs:
+      called_from:
+        required: true
+        type: string
 
 jobs:
   terraform-test:
