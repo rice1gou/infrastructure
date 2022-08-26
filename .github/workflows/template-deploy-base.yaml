@@ -35,7 +35,7 @@ on:
         type: string
 
 jobs:
-  terraform-test:
+  terraform:
     name: 'Terraform'
     environment: ${{ inputs.environment }}
     env:

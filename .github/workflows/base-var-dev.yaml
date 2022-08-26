@@ -8,7 +8,7 @@ on:
         type: string
 
 jobs:
-  terraform-test:
+  terraform:
     uses: ./.github/workflows/template-base.yaml
     with:
       backend_resource_group_name: 'TerraformRG'

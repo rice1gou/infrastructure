@@ -3,6 +3,9 @@ on:
   push:
     pathes:
       - ./base/**
+  pull_requests:
+    branches:
+      - main
 jobs:
   terraform:
     uses: ./.github/workflows/base-var-dev.yaml
@@ -10,12 +13,4 @@ jobs:
       called_from: 'test'
     secrets: inherit
 
-name: 'base-deploy-dev'
-on: workflow_dispatch
-jobs:
-  terraform:
-    uses: ./.github/workflows/base-var-dev.yaml
-    with:
-      called_from: 'deploy'
-    secrets: inherit
 
