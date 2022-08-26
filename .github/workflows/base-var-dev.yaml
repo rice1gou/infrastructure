@@ -1,7 +1,7 @@
 name: 'var-base-dev'
 
 on:
-  workflow_called:
+  workflow_call:
     inputs:
       called_from:
         required: true
