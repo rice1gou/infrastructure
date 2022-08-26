@@ -3,7 +3,7 @@ on:
   push:
     pathes:
       - ./base/**
-  pull_requests:
+  pull_request:
     branches:
       - main
 jobs:
