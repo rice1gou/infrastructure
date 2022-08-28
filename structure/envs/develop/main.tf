@@ -63,25 +63,29 @@ data "azurerm_subnet" "k8s" {
 }
 
 # Import Storage Account Module
-#module "sa" {
-#	source = "../../modules/sa"
-#	resource_group_name = azurerm_resource_group.structure.name
-#	location = var.location
-#	subnet_id = data.azurerm_subnet.ds.id
-#}
+module "sa" {
+	source = "../../modules/sa"
+	resource_group_name = azurerm_resource_group.structure.name
+	location = var.location
+	subnet_id = data.azurerm_subnet.ds.id
+}
 
 # Import PostgreSQL Module
-#module "psql" {
-#	source = "../../modules/psql"
-#	resource_group_name = azurerm_resource_group.structure.name
-#	location = var.location
-#	subnet_id = data.azurerm_subnet.psql.id
-#}
+module "psql" {
+	source = "../../modules/psql"
+	resource_group_name = azurerm_resource_group.structure.name
+	location = var.location
+	subnet_id = data.azurerm_subnet.psql.id
+}
 
 # Import Kubernetes Module
-#module "k8s" {
-#	source = "../../modules/k8s"
-#	resource_group_name = azurerm_resource_group.structure.name
-#	location = var.location
-#	subnet_id = data.azurerm_subnet.k8s.id
-#}
+module "k8s" {
+	source = "../../modules/k8s"
+	resource_group_name = azurerm_resource_group.structure.name
+	location = var.location
+  name_prefix = local.name_prefix
+  node_count = 3
+  vm_size = "Standard_B2ms"
+	subnet_id = data.azurerm_subnet.k8s.id
+  secret_rotation_interval = "60m"
+}
