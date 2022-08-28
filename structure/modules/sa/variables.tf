@@ -22,7 +22,7 @@ variable "subnet_id" {
   description = "リソースの配置先となるサブネットid"
 }
 
-variable account_tier {
+variable "account_tier" {
   description = "使用するストレージのスペック"
 }
 

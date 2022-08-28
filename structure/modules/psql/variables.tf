@@ -19,14 +19,18 @@ variable "name_prefix" {
 }
 
 variable "subnet_id" {
-	description = "リソースの配置先となるサブネットid"
+  description = "リソースの配置先となるサブネットid"
 }
 
 variable "sku_name" {
   description = "ストレージのスペック"
 }
 
-variable backup_retention_days {
+variable "storage_mb" {
+  description = "DBのストレージ容量"
+}
+
+variable "backup_retention_days" {
   description = "backupの保存期間"
 }
 

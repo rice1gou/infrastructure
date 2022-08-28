@@ -19,17 +19,17 @@ variable "name_prefix" {
 }
 
 variable "node_count" {
-	description = "デフォルトのノード数"
+  description = "デフォルトのノード数"
 }
 
 variable "vm_size" {
-	description = "ノードに使用するVMのスペック"
+  description = "ノードに使用するVMのスペック"
 }
 
 variable "subnet_id" {
-	description = "リソースの配置先となるサブネットid"
+  description = "リソースの配置先となるサブネットid"
 }
 
 variable "secret_rotation_interval" {
-	description = "CSIドライバーのシークレットの更新頻度"
+  description = "CSIドライバーのシークレットの更新頻度"
 }
