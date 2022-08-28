@@ -62,25 +62,10 @@ data "azurerm_subnet" "k8s" {
   resource_group_name  = var.base_resource_group_name
 }
 
-# Import Storage Account Module
-module "sa" {
-	source = "../../modules/sa"
-	resource_group_name = azurerm_resource_group.structure.name
-	location = var.location
-	subnet_id = data.azurerm_subnet.ds.id
-}
-
-# Import PostgreSQL Module
-module "psql" {
-	source = "../../modules/psql"
-	resource_group_name = azurerm_resource_group.structure.name
-	location = var.location
-	subnet_id = data.azurerm_subnet.psql.id
-}
-
 # Import Kubernetes Module
 module "k8s" {
 	source = "../../modules/k8s"
+  base_resource_group_name = var.base_resource_group_name
 	resource_group_name = azurerm_resource_group.structure.name
 	location = var.location
   name_prefix = local.name_prefix
@@ -88,4 +73,31 @@ module "k8s" {
   vm_size = "Standard_B2ms"
 	subnet_id = data.azurerm_subnet.k8s.id
   secret_rotation_interval = "60m"
+}
+
+# Import PostgreSQL Module
+module "psql" {
+	source = "../../modules/psql"
+  base_resource_group_name = var.base_resource_group_name
+	resource_group_name = azurerm_resource_group.structure.name
+  name_prefix = local.name_prefix
+	location = var.location
+	subnet_id = data.azurerm_subnet.psql.id
+  sku_name = "B_Standard_B1ms"
+  backup_retention_days = 7
+  administrator_login = var.administrator_login
+  administrator_password = var.administrator_password
+
+}
+
+# Import Storage Account Module
+module "sa" {
+	source = "../../modules/sa"
+  base_resource_group_name = var.base_resource_group_name
+	resource_group_name = azurerm_resource_group.structure.name
+  name_prefix = local.name_prefix
+	location = var.location
+	subnet_id = data.azurerm_subnet.ds.id
+  account_tier = "Standard"
+  account_replication_type = "LRS"
 }
