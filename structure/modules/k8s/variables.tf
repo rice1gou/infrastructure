@@ -2,6 +2,10 @@
 # Define Variables to be Used in the Kubernetes Module
 #
 
+variable "base_resource_group_name" {
+  description = "基盤となるリソースの配置先となるリソースグループ名"
+}
+
 variable "resource_group_name" {
   description = "配置先となるリソースグループ名"
 }
