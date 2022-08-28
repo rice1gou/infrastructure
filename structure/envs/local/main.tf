@@ -83,6 +83,7 @@ module "psql" {
   name_prefix              = local.name_prefix
   location                 = var.location
   subnet_id                = data.azurerm_subnet.psql.id
+  vnet_id                  = data.azurerm_virtual_network.vnet.id
   sku_name                 = "B_Standard_B1ms"
   storage_mb               = 32768
   backup_retention_days    = 7
@@ -99,6 +100,7 @@ module "sa" {
   name_prefix              = local.name_prefix
   location                 = var.location
   subnet_id                = data.azurerm_subnet.ds.id
+  vnet_id                  = data.azurerm_virtual_network.vnet.id
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }

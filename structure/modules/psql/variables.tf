@@ -22,6 +22,10 @@ variable "subnet_id" {
   description = "リソースの配置先となるサブネットid"
 }
 
+variable "vnet_id" {
+  description = "リソースの配置先となるバーチャルネットid"
+}
+
 variable "sku_name" {
   description = "ストレージのスペック"
 }

@@ -3,7 +3,7 @@
 #
 
 # Create Storage Account
-resource "azurerm_storage_account" "sa" {
+resource "azurerm_storage_account" "blob" {
   name                      = "${var.name_prefix}rice1gouapp"
   resource_group_name       = var.resource_group_name
   location                  = var.location
@@ -13,37 +13,43 @@ resource "azurerm_storage_account" "sa" {
   enable_https_traffic_only = true
   is_hns_enabled            = true
 
-  blob_properties {
-
-  }
+  depends_on = [azurerm_private_dns_zone_virtual_network_link.blob]
 }
 
 # Create Storage Account Private DNS Zone
-resource "azurerm_private_dns_zone" "sa" {
+resource "azurerm_private_dns_zone" "blob" {
   name                = "privatelink.blob.core.windows.net"
   resource_group_name = var.base_resource_group_name
 }
 
 # Create Private endpoint
-resource "azurerm_private_endpoint" "sa" {
-  name                = "${var.name_prefix}-sa-ep"
+resource "azurerm_private_endpoint" "blob" {
+  name                = "${var.name_prefix}-blob-ep"
   resource_group_name = var.resource_group_name
   location            = var.location
   subnet_id           = var.subnet_id
 
   private_service_connection {
-    name                           = "${var.name_prefix}-sa-psc"
-    private_connection_resource_id = azurerm_storage_account.sa.id
+    name                           = "${var.name_prefix}-blob-psc"
+    private_connection_resource_id = azurerm_storage_account.blob.id
     subresource_names              = ["blob"]
     is_manual_connection           = false
   }
 }
 
+# Private DNS Link to Vitual Network
+resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
+  name                  = "${var.name_prefix}-blob-privatelink.com"
+  private_dns_zone_name = azurerm_private_dns_zone.blob.name
+  virtual_network_id    = var.vnet_id
+  resource_group_name   = var.base_resource_group_name
+}
+
 # Create A Record
-resource "azurerm_private_dns_a_record" "sa" {
-  name                = azurerm_storage_account.sa.name
-  zone_name           = azurerm_private_dns_zone.sa.name
+resource "azurerm_private_dns_a_record" "blob" {
+  name                = azurerm_storage_account.blob.name
+  zone_name           = azurerm_private_dns_zone.blob.name
   resource_group_name = var.base_resource_group_name
   ttl                 = 300
-  records             = [azurerm_private_endpoint.sa.private_service_connection.0.private_ip_address]
+  records             = [azurerm_private_endpoint.blob.private_service_connection.0.private_ip_address]
 }

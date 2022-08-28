@@ -18,6 +18,10 @@ variable "name_prefix" {
   description = "名称に付けるプリフィックス"
 }
 
+variable "vnet_id" {
+  description = "リソースの配置先となるバーチャルネットid"
+}
+
 variable "subnet_id" {
   description = "リソースの配置先となるサブネットid"
 }
