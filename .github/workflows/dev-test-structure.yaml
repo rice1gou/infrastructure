@@ -2,6 +2,8 @@ name: 'dev-test-structure'
 
 on:
   push:
+    branches:
+      - feature/*
     paths:
       - ./structure/**
   pull_request:
