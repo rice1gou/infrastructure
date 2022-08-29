@@ -24,6 +24,9 @@ on:
       working_directory:
         required: true
         type: string
+      infrastructure_group_name:
+        required: true
+        type: string
       base_resource_group_name:
         required: true
         type: string
@@ -31,6 +34,12 @@ on:
         required: true
         type: string
       location:
+        required: true
+        type: string
+      administrator_login:
+        required: true
+        type: string
+      administrator_password:
         required: true
         type: string
 
@@ -47,9 +56,12 @@ jobs:
       BACKEND_STORAGE_ACCOUNT_NAME: ${{ inputs.backend_storage_account_name }}
       BACKEND_CONTAINER_NAME: ${{ inputs.backend_container_name }}
       BACKEND_KEY: ${{ inputs.backend_key }}
+      INFRASTRUCTURE_GROUP_NAME: ${{ inputs.infrastructure_group_name }}
       BASE_RESOURCE_GROUP_NAME: ${{ inputs.base_resource_group_name }}
       STRUCTURE_RESOURCE_GROUP_NAME: ${{ inputs.structure_resource_group_name }}
       LOCATION: ${{ inputs.location }}
+      ADMINISTRATOR_LOGIN: ${{ inputs.administrator_login }}
+      ADMINISTRATOR_PASSWORD: ${{ inputs.administrator_password }}
     runs-on: ubuntu-latest
 
     defaults:
@@ -92,6 +104,9 @@ jobs:
     - name: 'Terraform Plan'
       run: |
         terraform plan \
+        -var="infrastructure_group_name=${INFRASTRUCTURE_GROUP_NAME}" \
         -var="base_resource_group_name=${BASE_RESOURCE_GROUP_NAME}" \
         -var="structure_resource_group_name=${STRUCTURE_RESOURCE_GROUP_NAME}" \
-        -var="location=${LOCATION}"
+        -var="location=${LOCATION}" \
+        -var="administrator_login=${ADMINISTRATOR_LOGIN}" \
+        -var="administrator_password=${ADMINISTRATOR_PASSWORD}"

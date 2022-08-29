@@ -2,6 +2,8 @@ name: 'dev-test-base'
 
 on:
   push:
+    branches:
+      - feature/*
     paths:
       - ./base/**
   pull_request:
