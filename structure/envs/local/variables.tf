@@ -2,6 +2,10 @@
 #Define Variables to be Used in the Local Environment
 #
 
+variable "infrastructure_group_name" {
+  
+}
+
 variable "base_resource_group_name" {
   description = "基盤となるリソースの配置先となるリソースグループ名"
 }

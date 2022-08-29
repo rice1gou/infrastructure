@@ -2,12 +2,29 @@
 # Define Resources Associated With The Kubernetes
 #
 
+# Get Admin User Group Data
+data "azuread_group" "k8s" {
+  display_name     = var.infrastructure_group_name
+  security_enabled = true
+}
+
 # Create Kubernetes
 resource "azurerm_kubernetes_cluster" "k8s" {
   name                    = "${var.name_prefix}-k8s"
   location                = var.location
   resource_group_name     = var.resource_group_name
   dns_prefix              = "${var.name_prefix}-k8s"
+
+  # RBAC support
+  #role_based_access_control_enabled = true
+  #local_account_disabled = true
+  #azure_active_directory_role_based_access_control {
+  #  managed = true
+  #  admin_group_object_ids = [data.azuread_group.k8s.id]
+  #  azure_rbac_enabled = true
+  #}
+
+  # Private Cluster support
   # private_cluster_enabled = true
   # private_dns_zone_id     = azurerm_private_dns_zone.k8s.id
 
@@ -24,6 +41,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   identity {
     type = "SystemAssigned"
   }
+
 
   # Define Secret Store CSI Driver
   key_vault_secrets_provider {
@@ -44,7 +62,9 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     }
   }
 }
-
+#
+# Privaet Cluster Support
+#
 # Create Kubernetes Private DNS Zone
 #resource "azurerm_private_dns_zone" "k8s" {
 #  name                = "privatelink.${var.location}.azmk8s.io"
