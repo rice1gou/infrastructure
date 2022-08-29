@@ -15,9 +15,9 @@ variable "location" {
 }
 
 variable "administrator_login" {
-  describe = "PostgreSQLの管理者ID"
+  description = "PostgreSQLの管理者ID"
 }
 
 variable "administrator_password" {
-  describe = "PostgreSQLの管理者パスワード"
+  description = "PostgreSQLの管理者パスワード"
 }
