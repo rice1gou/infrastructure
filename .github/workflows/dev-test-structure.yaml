@@ -1,0 +1,30 @@
+name: 'dev-test-structure'
+
+on:
+  push:
+    branches:
+      - feature/*
+    paths:
+      - ./structure/**
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform-test:
+    uses: ./.github/workflows/template-test-structure.yaml
+    with:
+      backend_resource_group_name: 'TerraformRG'
+      backend_storage_account_name: 'rice1goutfstate'
+      backend_container_name: 'devtfstate'
+      backend_key: 'dev-structure.tfstate'
+      skip_check: LOW,CKV2_AZURE_1,CKV2_AZURE_18,CKV_AZURE_35,CKV_AZURE_136,CKV_AZURE_6,CKV_AZURE_116,CKV_AZURE_4,CKV_AZURE_5,CKV_AZURE_141,CKV_AZURE_115,CKV_AZURE_117
+      environment: 'develop'
+      working_directory: './structure/envs/develop/'
+      infrastructure_group_name: 'Infrastructure'
+      base_resource_group_name: 'DevBaseRG'
+      structure_resource_group_name: 'DevStructureRG'
+      location: 'japaneast'
+      administrator_login: 'psqladmin'
+      administrator_password: 'Pa22w0rD'
+    secrets: inherit

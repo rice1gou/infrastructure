@@ -1,0 +1,21 @@
+directory:
+- ./structure/envs/local
+download-external-modules: false
+evaluate-variables: true
+external-modules-download-path: .external_modules
+framework:
+- terraform
+secrets-scan-file-type: []
+skip-check:
+- LOW
+- CKV2_AZURE_1 # blob use customer-managed key
+- CKV2_AZURE_18 # blob use customer-managed key
+- CKV_AZURE_35 # blob network access default set deny
+- CKV_AZURE_136 # psql fs server geo-redundant backups
+- CKV_AZURE_6 # aks api server authorized ip ranges
+- CKV_AZURE_116 # aks azure-policy addon 
+- CKV_AZURE_4 # aks azure monitor logging  
+- CKV_AZURE_5 # aks rbac support
+- CKV_AZURE_141 # aks rbac support 
+- CKV_AZURE_115 # aks private cluster support
+- CKV_AZURE_117 # aks disk encryption
