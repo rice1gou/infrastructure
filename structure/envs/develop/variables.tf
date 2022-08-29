@@ -2,6 +2,10 @@
 # Define Variables to be Used in the Develop Environment
 #
 
+variable "infrastructure_group_name" {
+  description = "AzureADのインフラ管理ユーザーグループ名"
+}
+
 variable "base_resource_group_name" {
   description = "基盤となるリソースの配置先となるリソースグループ名"
 }

@@ -3,7 +3,7 @@
 #
 
 variable "infrastructure_group_name" {
-  
+  description = "AzureADのインフラ管理ユーザーグループ名"
 }
 
 variable "base_resource_group_name" {

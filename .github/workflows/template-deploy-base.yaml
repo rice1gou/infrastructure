@@ -78,14 +78,6 @@ jobs:
     - name: 'Terraform Validate'
       run: terraform validate
 
-    - name: 'Terraform Plan'
-      run: |
-        terraform plan \
-        -var="base_resource_group_name=${BASE_RESOURCE_GROUP_NAME}" \
-        -var="location=${LOCATOIN}" \
-        -var="address_space=${ADDRESS_SPACE}" \
-        -var="infrastructure_group_name=${INFRASTRUCTURE_GROUP_NAME}"
-
     - name: 'Terraform Apply'
       run: |
         terraform apply -auto-approve \

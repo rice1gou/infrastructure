@@ -65,6 +65,7 @@ data "azurerm_subnet" "k8s" {
 # Import Kubernetes Module
 module "k8s" {
   source                   = "../../modules/k8s"
+  infrastructure_group_name = var.infrastructure_group_name
   base_resource_group_name = var.base_resource_group_name
   resource_group_name      = azurerm_resource_group.structure.name
   location                 = var.location

@@ -13,6 +13,7 @@ jobs:
       backend_key: 'dev-structure.tfstate'
       environment: 'develop'
       working_directory: './structure/envs/develop/'
+      infrastructure_group_name: 'Infrastructure'
       base_resource_group_name: 'DevBaseRG'
       structure_resource_group_name: 'DevStructureRG'
       location: 'japaneast'

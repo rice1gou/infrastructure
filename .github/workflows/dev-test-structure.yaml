@@ -21,6 +21,7 @@ jobs:
       skip_check: LOW,CKV2_AZURE_1,CKV2_AZURE_18,CKV_AZURE_35,CKV_AZURE_136,CKV_AZURE_6,CKV_AZURE_116,CKV_AZURE_4,CKV_AZURE_5,CKV_AZURE_141,CKV_AZURE_115,CKV_AZURE_117
       environment: 'develop'
       working_directory: './structure/envs/develop/'
+      infrastructure_group_name: 'Infrastructure'
       base_resource_group_name: 'DevBaseRG'
       structure_resource_group_name: 'DevStructureRG'
       location: 'japaneast'
