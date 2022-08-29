@@ -104,7 +104,7 @@ jobs:
     - name: 'Terraform Plan'
       run: |
         terraform plan \
-        -var="infrastructure_group_name=${INFRASTRUCTURE_GROUP_NAME}"
+        -var="infrastructure_group_name=${INFRASTRUCTURE_GROUP_NAME}" \
         -var="base_resource_group_name=${BASE_RESOURCE_GROUP_NAME}" \
         -var="structure_resource_group_name=${STRUCTURE_RESOURCE_GROUP_NAME}" \
         -var="location=${LOCATION}" \
