@@ -12,7 +12,7 @@ resource "azurerm_storage_account" "blob" {
   account_kind              = "StorageV2"
   enable_https_traffic_only = true
   is_hns_enabled            = true
-  min_tls_version      = "TLS1_2"
+  min_tls_version           = "TLS1_2"
 
   queue_properties {
     logging {
@@ -23,7 +23,7 @@ resource "azurerm_storage_account" "blob" {
       retention_policy_days = 10
     }
   }
-  
+
   depends_on = [azurerm_private_dns_zone_virtual_network_link.blob]
 }
 

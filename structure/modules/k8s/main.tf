@@ -10,10 +10,10 @@ data "azuread_group" "k8s" {
 
 # Create Kubernetes
 resource "azurerm_kubernetes_cluster" "k8s" {
-  name                    = "${var.name_prefix}-k8s"
-  location                = var.location
-  resource_group_name     = var.resource_group_name
-  dns_prefix              = "${var.name_prefix}-k8s"
+  name                = "${var.name_prefix}-k8s"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  dns_prefix          = "${var.name_prefix}-k8s"
 
   # RBAC support
   #role_based_access_control_enabled = true

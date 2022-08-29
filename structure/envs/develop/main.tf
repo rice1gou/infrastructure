@@ -64,16 +64,16 @@ data "azurerm_subnet" "k8s" {
 
 # Import Kubernetes Module
 module "k8s" {
-  source                   = "../../modules/k8s"
+  source                    = "../../modules/k8s"
   infrastructure_group_name = var.infrastructure_group_name
-  base_resource_group_name = var.base_resource_group_name
-  resource_group_name      = azurerm_resource_group.structure.name
-  location                 = var.location
-  name_prefix              = local.name_prefix
-  node_count               = 3
-  vm_size                  = "Standard_B2ms"
-  subnet_id                = data.azurerm_subnet.k8s.id
-  secret_rotation_interval = "60m"
+  base_resource_group_name  = var.base_resource_group_name
+  resource_group_name       = azurerm_resource_group.structure.name
+  location                  = var.location
+  name_prefix               = local.name_prefix
+  node_count                = 3
+  vm_size                   = "Standard_B2ms"
+  subnet_id                 = data.azurerm_subnet.k8s.id
+  secret_rotation_interval  = "60m"
 }
 
 # Import PostgreSQL Module
