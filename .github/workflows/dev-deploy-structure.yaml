@@ -16,4 +16,6 @@ jobs:
       base_resource_group_name: 'DevBaseRG'
       structure_resource_group_name: 'DevStructureRG'
       location: 'japaneast'
+      administrator_login: 'admin'
+      administrator_password: 'admin'
     secrets: inherit

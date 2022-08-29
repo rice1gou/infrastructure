@@ -30,6 +30,12 @@ on:
       location:
         required: true
         type: string
+      administrator_login:
+        required: true
+        type: string
+      administrator_password:
+        required: true
+        type: string
 
 jobs:
   terraform-test:
@@ -47,6 +53,8 @@ jobs:
       BASE_RESOURCE_GROUP_NAME: ${{ inputs.base_resource_group_name }}
       STRUCTURE_RESOURCE_GROUP_NAME: ${{ inputs.structure_resource_group_name }}
       LOCATION: ${{ inputs.location }}
+      ADMINISTRATOR_LOGIN: ${{ inputs.administrator_login }}
+      ADMINISTRATOR_PASSWORD: ${{ inputs.administrator_password }}
     runs-on: ubuntu-latest
 
     defaults:
@@ -76,4 +84,6 @@ jobs:
         terraform destroy -auto-approve \
         -var="base_resource_group_name=${BASE_RESOURCE_GROUP_NAME}" \
         -var="structure_resource_group_name=${STRUCTURE_RESOURCE_GROUP_NAME}" \
-        -var="location=${LOCATION}"
+        -var="location=${LOCATION}" \
+        -var="administrator_login=${ADMINISTRATOR_LOGIN}" \
+        -var="administrator_password=${ADMINISTRATOR_PASSWORD}"
