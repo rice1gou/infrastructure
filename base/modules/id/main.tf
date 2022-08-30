@@ -19,17 +19,17 @@ resource "azurerm_user_assigned_identity" "kubelet" {
 resource "azurerm_role_assignment" "cp" {
   scope                = var.resource_group_id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_user_assigned_identity.cp.id
+  principal_id         = azurerm_user_assigned_identity.cp.principal_id
 }
 
 resource "azurerm_role_assignment" "kubelet" {
   scope                = var.resource_group_id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_user_assigned_identity.kubelet.id
+  principal_id         = azurerm_user_assigned_identity.kubelet.principal_id
 }
 
 resource "azurerm_role_assignment" "cp2kubelet" {
   scope                = azurerm_user_assigned_identity.kubelet.id
   role_definition_name = "Owner"
-  principal_id         = azurerm_user_assigned_identity.cp.id
+  principal_id         = azurerm_user_assigned_identity.cp.principal_id
 }
