@@ -72,6 +72,7 @@ module "k8s" {
   name_prefix               = local.name_prefix
   node_count                = 3
   vm_size                   = "Standard_B2ms"
+  vnet_id                  = data.azurerm_virtual_network.vnet.id
   subnet_id                 = data.azurerm_subnet.k8s.id
   secret_rotation_interval  = "60m"
 }
@@ -83,8 +84,8 @@ module "psql" {
   resource_group_name      = azurerm_resource_group.structure.name
   name_prefix              = local.name_prefix
   location                 = var.location
-  subnet_id                = data.azurerm_subnet.psql.id
   vnet_id                  = data.azurerm_virtual_network.vnet.id
+  subnet_id                = data.azurerm_subnet.psql.id
   sku_name                 = "B_Standard_B1ms"
   storage_mb               = 32768
   backup_retention_days    = 7
@@ -100,8 +101,8 @@ module "sa" {
   resource_group_name      = azurerm_resource_group.structure.name
   name_prefix              = local.name_prefix
   location                 = var.location
-  subnet_id                = data.azurerm_subnet.ds.id
   vnet_id                  = data.azurerm_virtual_network.vnet.id
+  subnet_id                = data.azurerm_subnet.ds.id
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }

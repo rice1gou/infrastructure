@@ -37,13 +37,13 @@ resource "azurerm_resource_group" "base" {
   location = var.location
 }
 
-# Import Virtual Network Module
-module "vnet" {
-  source              = "../../modules/vnet"
+# Import Identity Module
+module "id" {
+  source              = "../../modules/id"
   resource_group_name = azurerm_resource_group.base.name
-  location            = var.location
-  name_prefix         = local.name_prefix
-  address_space       = var.address_space
+  resource_group_id   = azurerm_resource_group.base.id
+  lcoation            = var.location
+  name_prefix         = var.name_prefix
 }
 
 # Import Key Vault Module
@@ -56,4 +56,13 @@ module "kv" {
   sku_name                   = "standard"
   enable_rbac_authorization  = true
   infrastructure_group_name  = var.infrastructure_group_name
+}
+
+# Import Virtual Network Module
+module "vnet" {
+  source              = "../../modules/vnet"
+  resource_group_name = azurerm_resource_group.base.name
+  location            = var.location
+  name_prefix         = local.name_prefix
+  address_space       = var.address_space
 }

@@ -34,6 +34,10 @@ variable "subnet_id" {
   description = "リソースの配置先となるサブネットid"
 }
 
+variable "vnet_id" {
+  description = "リソースの配置先となる仮想ネットワークid"
+}
+
 variable "secret_rotation_interval" {
   description = "CSIドライバーのシークレットの更新頻度"
 }
