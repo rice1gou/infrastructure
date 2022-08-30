@@ -29,9 +29,9 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   # RBAC support
   local_account_disabled = true
   azure_active_directory_role_based_access_control {
-    managed = true
+    managed                = true
     admin_group_object_ids = [data.azuread_group.k8s.id]
-    azure_rbac_enabled = true
+    azure_rbac_enabled     = true
   }
 
   # Private Cluster support

@@ -42,8 +42,8 @@ module "id" {
   source              = "../../modules/id"
   resource_group_name = azurerm_resource_group.base.name
   resource_group_id   = azurerm_resource_group.base.id
-  lcoation            = var.location
-  name_prefix         = var.name_prefix
+  location            = var.location
+  name_prefix         = local.name_prefix
 }
 
 # Import Key Vault Module

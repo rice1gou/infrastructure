@@ -72,7 +72,7 @@ module "k8s" {
   name_prefix               = local.name_prefix
   node_count                = 3
   vm_size                   = "Standard_B2ms"
-  vnet_id                  = data.azurerm_virtual_network.vnet.id
+  vnet_id                   = data.azurerm_virtual_network.vnet.id
   subnet_id                 = data.azurerm_subnet.k8s.id
   secret_rotation_interval  = "60m"
 }
