@@ -50,7 +50,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   # Define Authorization Identity Type
   identity {
     type         = "UserAssigned"
-    identity_ids = data.azurerm_user_assigned_identity.cp.id
+    identity_ids = [data.azurerm_user_assigned_identity.cp.id]
   }
 
   kubelet_identity {
