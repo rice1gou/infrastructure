@@ -8,6 +8,17 @@ data "azuread_group" "k8s" {
   security_enabled = true
 }
 
+# Get Managed Identity Data
+data "azurerm_user_assigned_identity" "kubelet" {
+  name                = "${var.name_prefix}-kubelet-id"
+  resource_group_name = var.base_resource_group_name
+}
+
+data "azurerm_user_assigned_identity" "cp" {
+  name                = "${var.name_prefix}-cp-id"
+  resource_group_name = var.base_resource_group_name
+}
+
 # Create Kubernetes
 resource "azurerm_kubernetes_cluster" "k8s" {
   name                = "${var.name_prefix}-k8s"
@@ -16,13 +27,12 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   dns_prefix          = "${var.name_prefix}-k8s"
 
   # RBAC support
-  #role_based_access_control_enabled = true
-  #local_account_disabled = true
-  #azure_active_directory_role_based_access_control {
-  #  managed = true
-  #  admin_group_object_ids = [data.azuread_group.k8s.id]
-  #  azure_rbac_enabled = true
-  #}
+  local_account_disabled = true
+  azure_active_directory_role_based_access_control {
+    managed                = true
+    admin_group_object_ids = [data.azuread_group.k8s.id]
+    azure_rbac_enabled     = true
+  }
 
   # Private Cluster support
   # private_cluster_enabled = true
@@ -39,9 +49,15 @@ resource "azurerm_kubernetes_cluster" "k8s" {
 
   # Define Authorization Identity Type
   identity {
-    type = "SystemAssigned"
+    type         = "UserAssigned"
+    identity_ids = [data.azurerm_user_assigned_identity.cp.id]
   }
 
+  kubelet_identity {
+    client_id                 = data.azurerm_user_assigned_identity.kubelet.client_id
+    object_id                 = data.azurerm_user_assigned_identity.kubelet.principal_id
+    user_assigned_identity_id = data.azurerm_user_assigned_identity.kubelet.id
+  }
 
   # Define Secret Store CSI Driver
   key_vault_secrets_provider {
@@ -69,6 +85,13 @@ resource "azurerm_kubernetes_cluster" "k8s" {
 #resource "azurerm_private_dns_zone" "k8s" {
 #  name                = "privatelink.${var.location}.azmk8s.io"
 #  resource_group_name = var.base_resource_group_name
+#}
+
+#resource "azurerm_private_dns_zone_virtual_network_link" "k8s" {
+#  name                  = "${var.name_prefix}-k8s-privatelink.com"
+#  private_dns_zone_name = azurerm_private_dns_zone.k8s.name
+#  virtual_network_id    = var.vnet_id
+#  resource_group_name   = var.base_resource_group_name
 #}
 
 # Create Private endpoint
