@@ -1,0 +1,7 @@
+resources:
+  - addons/grafana.yaml
+  - addons/jaeger.yaml
+  - addons/kiali.yaml
+  - addons/prometheus.yaml
+  - network/gateway.yaml
+  - network/virtual-service.yaml

@@ -1,0 +1,4 @@
+name: 'dev-destroy-container'
+
+on:
+  workflow_dispatch:

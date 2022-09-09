@@ -1,0 +1,11 @@
+name: 'dev-test-container'
+
+on:
+  push:
+    branches:
+      - feature/*
+    paths:
+      - ./base/*
+  pull_request:
+    branches:
+      - main
