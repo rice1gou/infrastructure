@@ -5,7 +5,7 @@ on:
     branches:
       - feature/*
     paths:
-      - ./base/**
+      - ./base/*
   pull_request:
     branches:
       - main
